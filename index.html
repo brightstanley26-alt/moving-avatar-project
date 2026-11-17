@@ -11,3 +11,35 @@
     <p>My goal is to create a realistic digital character that responds to camera movements.</p>
 </body>
 </html>
+         <!-- Moving Avatar Camera Section -->
+<section id="avatar-camera">
+    <h2>My Moving Avatar Camera</h2>
+
+    <video id="camera" autoplay playsinline muted
+        style="width:100%; max-width:400px; border-radius:15px;">
+    </video>
+
+    <p id="camera-status">Camera not started yet.</p>
+
+    <button id="start-camera">Start Camera</button>
+</section>
+
+<script>
+const camera = document.getElementById("camera");
+const status = document.getElementById("camera-status");
+const button = document.getElementById("start-camera");
+
+button.addEventListener("click", async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        });
+
+        camera.srcObject = stream;
+        status.textContent = "Camera is running!";
+    } catch (error) {
+        status.textContent = "Camera access was not granted.";
+    }
+});
+</script> 
